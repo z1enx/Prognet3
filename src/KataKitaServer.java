@@ -17,6 +17,7 @@ import java.util.concurrent.ScheduledExecutorService;
  *  - clientPool         : satu thread per client (ClientHandler)
  *  - scheduler          : timer 2 menit tiap sesi game (waktu habis diputuskan server)
  *  - broadcaster        : mengirim leaderboard/info ke semua client tanpa menahan thread client
+ *  - dbWriter           : menyimpan hasil balapan ke database di latar belakang
  *
  * Cara menjalankan: java -cp "out/server;mysql-connector-j.jar" KataKitaServer [port]
  */
@@ -26,15 +27,25 @@ public class KataKitaServer {
     private final ExecutorService clientPool = Executors.newCachedThreadPool(named("client"));
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2, named("timer"));
     private final ExecutorService broadcaster = Executors.newSingleThreadExecutor(named("broadcast"));
+    private final ExecutorService dbWriter = Executors.newSingleThreadExecutor(named("db-writer"));
 
     /** Set yang aman diakses banyak thread. */
     private final Set<ClientHandler> clients = ConcurrentHashMap.newKeySet();
 
     private final ServerLogger logger;
+    private final RaceRoom raceRoom;
 
     public KataKitaServer(int port, ServerLogger logger) {
         this.port = port;
         this.logger = logger;
+        this.raceRoom = new RaceRoom(this);
+    }
+
+    public RaceRoom race() { return raceRoom; }
+
+    /** Menjalankan pekerjaan database di thread db-writer. */
+    public void runDbTask(Runnable task) {
+        dbWriter.execute(task);
     }
 
     public void start() throws IOException {

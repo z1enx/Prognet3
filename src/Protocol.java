@@ -73,6 +73,47 @@ public final class Protocol {
     public static final String PUSH_ONLINE = "PUSH_ONLINE";
     public static final String PUSH_GAMEOVER = "PUSH_GAMEOVER";
 
+    // ---------------------------------------------------------------
+    // Mode balapan (semua pemain di lobi menebak kata yang sama)
+    //
+    // REQUEST                      RESPONSE
+    // RACE_JOIN                    OK
+    // RACE_LEAVE                   OK
+    // RACE_START                   OK  atau  ERR|pesan
+    // RACE_GUESS|KATA              RESULT|pola|CONTINUE|percobaanKe
+    //                              RESULT|pola|WIN|percobaan
+    //                              RESULT|pola|OUT|percobaan   (kesempatan habis)
+    //                              INVALID|pesan  atau  ERR|pesan
+    //
+    // PUSH
+    // PUSH_RACE_LOBBY|nama1,nama2|STATUS        STATUS = WAITING / COUNTDOWN / RUNNING
+    // PUSH_RACE_COUNTDOWN|detik
+    // PUSH_RACE_START|durasiDetik|nama1,nama2   peserta ronde ini
+    // PUSH_RACE_PROGRESS|nama|percobaanKe|pola|status   status = CONTINUE / WIN / OUT
+    // PUSH_RACE_END|pemenang|jawaban|durasiDetik        pemenang "-" kalau tidak ada
+    // ---------------------------------------------------------------
+    public static final String RACE_JOIN = "RACE_JOIN";
+    public static final String RACE_LEAVE = "RACE_LEAVE";
+    public static final String RACE_START = "RACE_START";
+    public static final String RACE_GUESS = "RACE_GUESS";
+
+    public static final String OUT = "OUT";
+    public static final String LEFT = "LEFT";
+    public static final String NO_WINNER = "-";
+
+    public static final String STATE_WAITING = "WAITING";
+    public static final String STATE_COUNTDOWN = "COUNTDOWN";
+    public static final String STATE_RUNNING = "RUNNING";
+
+    public static final String PUSH_RACE_LOBBY = "PUSH_RACE_LOBBY";
+    public static final String PUSH_RACE_COUNTDOWN = "PUSH_RACE_COUNTDOWN";
+    public static final String PUSH_RACE_START = "PUSH_RACE_START";
+    public static final String PUSH_RACE_PROGRESS = "PUSH_RACE_PROGRESS";
+    public static final String PUSH_RACE_END = "PUSH_RACE_END";
+
+    public static final int RACE_COUNTDOWN_SEC = 3;
+    public static final int MIN_RACERS = 2;
+
     // Aturan permainan (satu sumber untuk server dan client)
     public static final int WORD_LENGTH = 5;
     public static final int MAX_ATTEMPTS = 6;

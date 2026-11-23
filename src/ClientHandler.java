@@ -65,6 +65,7 @@ public class ClientHandler implements Runnable {
         } catch (IOException e) {
             server.logger().log("Koneksi " + who() + " terputus: " + e.getMessage());
         } finally {
+            server.race().leave(this);
             abandonSession();
             playerId = -1;
             server.removeClient(this);
@@ -79,6 +80,14 @@ public class ClientHandler implements Runnable {
 
     public boolean isLoggedIn() {
         return playerId > 0;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public int getPlayerId() {
+        return playerId;
     }
 
     private String who() {
@@ -101,6 +110,18 @@ public class ClientHandler implements Runnable {
             case Protocol.QUIT_GAME:   return requireLogin() ? handleQuit() : notLoggedIn();
             case Protocol.LEADERBOARD: return Protocol.build(Protocol.LB, server.leaderboardPayload());
             case Protocol.LAST_RESULT: return requireLogin() ? handleLastResult() : notLoggedIn();
+
+            // Mode balapan
+            case Protocol.RACE_JOIN:   return requireLogin() ? server.race().join(this) : notLoggedIn();
+            case Protocol.RACE_START:  return requireLogin() ? server.race().start(this) : notLoggedIn();
+            case Protocol.RACE_GUESS: {
+                if (!requireLogin()) return notLoggedIn();
+                String[] p = Protocol.parse(line);
+                return server.race().guess(this, p.length > 1 ? p[1] : "");
+            }
+            case Protocol.RACE_LEAVE:
+                server.race().leave(this);
+                return Protocol.OK;
             default:
                 return Protocol.build(Protocol.ERR, "Perintah tidak dikenal: " + cmd);
         }
@@ -140,14 +161,17 @@ public class ClientHandler implements Runnable {
         if (p[2].length() < 4) {
             return Protocol.build(Protocol.ERR, "Password minimal 4 karakter");
         }
-        if (db.registerPlayer(p[1], p[2])) {
+        String error = db.registerPlayer(p[1], p[2]);
+        if (error == null) {
             server.logger().log("Registrasi akun baru: " + p[1]);
             return Protocol.OK;
         }
-        return Protocol.build(Protocol.ERR, "Registrasi gagal. Username sudah digunakan.");
+        server.logger().log("Registrasi gagal untuk '" + p[1] + "': " + error);
+        return Protocol.build(Protocol.ERR, error);
     }
 
     private String handleLogout() {
+        server.race().leave(this);
         abandonSession();
         server.logger().log("Logout: " + who());
         playerId = -1;

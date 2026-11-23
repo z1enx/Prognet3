@@ -24,6 +24,7 @@ public class Main extends JFrame {
     private LeaderboardPanel leaderboardPanel = new LeaderboardPanel(this);
     private CooldownPanel cooldownPanel = new CooldownPanel(this);
     private EndGamePanel endGamePanel = new EndGamePanel(this);
+    private RacePanel racePanel = new RacePanel(this);
 
     private int currentUserId = -1;
     private String currentUsername;
@@ -52,6 +53,7 @@ public class Main extends JFrame {
         mainPanelContainer.add(leaderboardPanel, "LEADERBOARD");
         mainPanelContainer.add(cooldownPanel, "COOLDOWN");
         mainPanelContainer.add(endGamePanel, "ENDGAME");
+        mainPanelContainer.add(racePanel, "RACE");
 
         add(mainPanelContainer);
 
@@ -83,6 +85,13 @@ public class Main extends JFrame {
         conn.onPush(Protocol.PUSH_INFO, p -> mainMenuPanel.setActivity(p.length > 1 ? p[1] : ""));
         conn.onPush(Protocol.PUSH_ONLINE, p -> mainMenuPanel.setOnlineCount(p.length > 1 ? p[1] : "0"));
         conn.onPush(Protocol.PUSH_GAMEOVER, p -> gamePanel.onServerGameOver(p));
+
+        // Mode balapan
+        conn.onPush(Protocol.PUSH_RACE_LOBBY, p -> racePanel.onLobby(p));
+        conn.onPush(Protocol.PUSH_RACE_COUNTDOWN, p -> racePanel.onCountdown(p));
+        conn.onPush(Protocol.PUSH_RACE_START, p -> racePanel.onRaceStart(p));
+        conn.onPush(Protocol.PUSH_RACE_PROGRESS, p -> racePanel.onProgress(p));
+        conn.onPush(Protocol.PUSH_RACE_END, p -> racePanel.onRaceEnd(p));
     }
 
     public ServerConnection getConnection() {
@@ -94,6 +103,8 @@ public class Main extends JFrame {
             gamePanel.onPanelShown();
         } else if (panelName.equals("LEADERBOARD")) {
             leaderboardPanel.onPanelShown();
+        } else if (panelName.equals("RACE")) {
+            racePanel.onPanelShown();
         }
         cardLayout.show(mainPanelContainer, panelName);
     }

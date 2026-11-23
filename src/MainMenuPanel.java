@@ -23,16 +23,20 @@ public class MainMenuPanel extends JPanel {
         welcomeLabel.setMaximumSize(new Dimension(500, 40));
 
         JButton startGameButton = createStyledButton("Mulai Main");
+        JButton raceButton = createStyledButton("Mode Balapan");
         JButton leaderboardButton = createStyledButton("Lihat Leaderboard");
         JButton logoutButton = createStyledButton("Logout");
 
         logoutButton.addActionListener(e -> mainApp.logout());
         startGameButton.addActionListener(e -> mainApp.showPanel("GAME"));
         leaderboardButton.addActionListener(e -> mainApp.showPanel("LEADERBOARD"));
+        raceButton.addActionListener(e -> mainApp.showPanel("RACE"));
 
         add(welcomeLabel);
         add(Box.createRigidArea(new Dimension(0, 30)));
         add(startGameButton);
+        add(Box.createRigidArea(new Dimension(0, 15)));
+        add(raceButton);
         add(Box.createRigidArea(new Dimension(0, 15)));
         add(leaderboardButton);
         add(Box.createRigidArea(new Dimension(0, 15)));

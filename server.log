@@ -34,3 +34,18 @@
 [2026-11-23 10:43:43] [client-3] Logout: enji
 [2026-11-23 10:43:45] [client-4] Client /127.0.0.1:62160 keluar
 [2026-11-23 10:43:46] [client-3] Client /127.0.0.1:53253 keluar
+[2026-11-23 11:02:54] [main] Server KataKita berjalan di port 5000
+[2026-11-23 11:03:03] [main] Client terhubung dari /127.0.0.1:57167 (total koneksi: 1)
+[2026-11-23 11:03:07] [client-1] Login: enji (id 1)
+[2026-11-23 11:03:12] [client-1] enji masuk lobi balapan (1 pemain)
+[2026-11-23 11:03:21] [main] Client terhubung dari /127.0.0.1:57169 (total koneksi: 2)
+[2026-11-23 11:03:26] [client-2] Login: linda (id 3)
+[2026-11-23 11:03:27] [client-2] linda masuk lobi balapan (2 pemain)
+[2026-11-23 11:03:42] [client-1] enji memulai hitung mundur balapan
+[2026-11-23 11:03:45] [timer-1] Balapan dimulai, 2 peserta, kata: JALAN
+[2026-11-23 11:04:16] [client-1] Balapan selesai | pemenang: enji | kata: JALAN | 31 dtk
+[2026-11-23 11:04:16] [db-writer-1] Hasil balapan (JALAN, 2 peserta) tersimpan
+[2026-11-23 11:04:27] [client-1] enji keluar dari lobi balapan
+[2026-11-23 11:04:33] [client-2] linda keluar dari lobi balapan
+[2026-11-23 11:06:45] [client-2] Client /127.0.0.1:57169 keluar
+[2026-11-23 11:06:47] [client-1] Client /127.0.0.1:57167 keluar
