@@ -1,0 +1,36 @@
+[2026-11-23 00:36:16] [main] Server KataKita berjalan di port 5000
+[2026-11-23 00:36:31] [main] Client terhubung dari /127.0.0.1:59834 (total koneksi: 1)
+[2026-11-23 00:37:08] [client-1] Login gagal untuk 'enjikerenbanget'
+[2026-11-23 00:37:20] [client-1] Client /127.0.0.1:59834 keluar
+[2026-11-23 00:39:19] [main] Server KataKita berjalan di port 5000
+[2026-11-23 00:39:24] [main] Client terhubung dari /127.0.0.1:52237 (total koneksi: 1)
+[2026-11-23 00:39:33] [client-1] Login gagal untuk 'enji'
+[2026-11-23 09:36:29] [client-1] Client /127.0.0.1:52237 keluar
+[2026-11-23 10:19:00] [main] Server KataKita berjalan di port 5000
+[2026-11-23 10:19:05] [main] Client terhubung dari /127.0.0.1:56196 (total koneksi: 1)
+[2026-11-23 10:19:09] [client-1] Registrasi akun baru: enji
+[2026-11-23 10:19:15] [client-1] Login: enji (id 1)
+[2026-11-23 10:19:27] [main] Client terhubung dari /127.0.0.1:56199 (total koneksi: 2)
+[2026-11-23 10:19:32] [client-2] Registrasi akun baru: linda
+[2026-11-23 10:19:39] [client-2] Login: linda (id 2)
+[2026-11-23 10:19:43] [client-2] linda mulai game, kata: KEBUN
+[2026-11-23 10:21:38] [client-2] linda meninggalkan game (tidak disimpan)
+[2026-11-23 10:21:38] [client-2] Client /127.0.0.1:56199 keluar
+[2026-11-23 10:21:42] [client-1] Koneksi enji terputus: Connection reset
+[2026-11-23 10:21:42] [client-1] Client /127.0.0.1:56196 keluar
+[2026-11-23 10:37:39] [main] Client terhubung dari /127.0.0.1:53253 (total koneksi: 1)
+[2026-11-23 10:37:45] [client-3] Login gagal untuk 'enji'
+[2026-11-23 10:37:48] [client-3] Registrasi akun baru: enji
+[2026-11-23 10:37:55] [client-3] Login: enji (id 1)
+[2026-11-23 10:37:58] [client-3] enji mulai game, kata: SIANG
+[2026-11-23 10:39:52] [client-3] enji MENANG | kata SIANG | skor 120 | 113 dtk | 6 percobaan
+[2026-11-23 10:40:15] [main] Client terhubung dari /127.0.0.1:62160 (total koneksi: 2)
+[2026-11-23 10:40:19] [client-4] Registrasi akun baru: linda
+[2026-11-23 10:40:25] [client-4] Login: linda (id 3)
+[2026-11-23 10:40:28] [client-4] linda mulai game, kata: METAI
+[2026-11-23 10:42:28] [timer-2] linda KALAH | kata METAI | skor 0 | 120 dtk | 4 percobaan
+[2026-11-23 10:42:28] [timer-2] Waktu habis untuk linda
+[2026-11-23 10:43:42] [client-4] Logout: linda
+[2026-11-23 10:43:43] [client-3] Logout: enji
+[2026-11-23 10:43:45] [client-4] Client /127.0.0.1:62160 keluar
+[2026-11-23 10:43:46] [client-3] Client /127.0.0.1:53253 keluar
